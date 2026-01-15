@@ -1,18 +1,17 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useHeaderScroll } from '../hooks/useHeaderScroll';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const { scrolled, isHidden } = useHeaderScroll();
 
-  // Get scrolled state from parent or you could use the useScroll hook
-  // For now we'll check scroll state when menu opens/closes
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <header className={`header ${scrolled ? 'scrolled' : ''}`}>
+    <header className={`header ${scrolled ? 'scrolled' : ''} ${isHidden ? 'hidden' : ''}`}>
       <div className="container header-content">
         <div className="logo">
           <div className="logo-circle"></div>
